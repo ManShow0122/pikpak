@@ -22,7 +22,7 @@
           <n-button  @click="showUserMenu = true">
             添加自定义菜单
           </n-button>
-          <n-icon :color="themeVars.primaryColor"  @click="showAddUrl = true">
+          <n-icon size="large" :color="themeVars.primaryColor"  @click="showAddUrl = true">
             <circle-plus></circle-plus>
           </n-icon>
         </n-space>
@@ -40,7 +40,7 @@
         <div class="toolbar-item" @click="batchCopyAll">
           <n-tooltip>
             <template #trigger>
-              <n-icon>
+              <n-icon size="large">
                 <icon-copy></icon-copy>
               </n-icon>
             </template>
@@ -50,7 +50,7 @@
         <div class="toolbar-item" @click="batchMoveAll">
           <n-tooltip>
             <template #trigger>
-              <n-icon>
+              <n-icon size="large">
                 <switch-horizontal></switch-horizontal>
               </n-icon>
             </template>
@@ -60,7 +60,7 @@
         <div class="toolbar-item" @click="aria2All">
           <n-tooltip>
             <template #trigger>
-              <n-icon>
+              <n-icon size="large">
                 <letter-a></letter-a>
               </n-icon>
             </template>
@@ -70,7 +70,7 @@
         <div class="toolbar-item" @click="copyAll">
           <n-tooltip>
             <template #trigger>
-              <n-icon>
+              <n-icon size="large">
                 <share></share>
               </n-icon>
             </template>
@@ -80,7 +80,7 @@
         <div class="toolbar-item" @click="deleteFile(checkedRowKeys)">
           <n-tooltip>
             <template #trigger>
-              <n-icon>
+              <n-icon size="large">
                 <circle-x></circle-x>
               </n-icon>
             </template>
@@ -92,7 +92,7 @@
     <n-modal v-model:show="showAddUrl">
       <n-card style="width: 600px;" title="添加链接或新建文件夹">
         <template #header-extra>
-          <n-icon @click="showAddUrl = false">
+          <n-icon size="large" @click="showAddUrl = false">
             <circle-x></circle-x>
           </n-icon>
         </template>
@@ -112,7 +112,7 @@
     <n-modal v-model:show="showVideo">
       <n-card style="width: 100vw; height: 100vh;" :title="fileInfo ? fileInfo.name : '视频'">
         <template #header-extra>
-          <n-icon @click="showVideo = false">
+          <n-icon size="large" @click="showVideo = false">
             <circle-x></circle-x>
           </n-icon>
         </template>
@@ -126,7 +126,7 @@
     <n-modal v-model:show="showImage">
       <n-card style="width: 100vw; height: 100vh;" :title="fileInfo ? fileInfo.name : '图片'">
         <template #header-extra>
-          <n-icon @click="showImage = false">
+          <n-icon size="large" @click="showImage = false">
             <circle-x></circle-x>
           </n-icon>
         </template>
@@ -139,7 +139,7 @@
     <n-modal v-model:show="showName">
       <n-card style="width: 600px;" title="修改名称">
         <template #header-extra>
-          <n-icon @click="showName = false">
+          <n-icon size="large" @click="showName = false">
             <circle-x></circle-x>
           </n-icon>
         </template>
@@ -157,7 +157,7 @@
           自定义菜单 <a href="https://www.tjsky.net/?p=220#i-8" target="_blank"> <n-icon style="vertical-align: middle;" size="20" color="#d03050"><zoom-question></zoom-question></n-icon> </a>
         </template>
         <template #header-extra>
-          <n-icon @click="showUserMenu = false">
+          <n-icon size="large" @click="showUserMenu = false">
             <circle-x></circle-x>
           </n-icon>
         </template>
@@ -195,7 +195,7 @@
     <n-modal v-model:show="showCopy">
       <n-card style="width: 600px;" title="复制链接">
         <template #header-extra>
-          <n-icon @click="showCopy = false">
+          <n-icon size="large" @click="showCopy = false">
             <circle-x></circle-x>
           </n-icon>
         </template>
@@ -221,7 +221,7 @@
     <n-modal v-model:show="showCopyFail">
       <n-card style="width: 600px;" title="复制失败，自己选择复制">
         <template #header-extra>
-          <n-icon @click="showCopyFail = false">
+          <n-icon size="large" @click="showCopyFail = false">
             <circle-x></circle-x>
           </n-icon>
         </template>

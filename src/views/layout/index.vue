@@ -30,7 +30,7 @@
         <p style="margin-bottom: 0;">
           <n-tooltip :width="600" placement="right">
               <template #trigger>
-                <a style="color: #306eff;" target="_blank" href="https://k.youshop10.com/JGDtoxg6">2021年12月23日~2021年12月31日￥119购体验会员VIP年卡</a>
+                <a style="color: #306eff;" target="_blank" href="https://k.youshop10.com/JGDtoxg6">￥119购体验VIP年卡</a>
               </template>
               2021年12月23日~2021年12月31日 【1年PikPak体验会员仅售：119元！原价450元】 2022年1月1日起： 1年PikPak体验会员仅售：169元！原价450元】 -每人只能购买使用一次，官方代理商分销，感谢支持
           </n-tooltip>
@@ -49,7 +49,7 @@
           <div class="action">
             <n-tooltip>
               <template #trigger>
-                <n-icon @click="logoutPost">
+                <n-icon size="large" @click="logoutPost">
                   <logout></logout>
                 </n-icon>
               </template>
@@ -70,7 +70,7 @@
   <n-modal v-model:show="showCode">
     <n-card style="width: 600px;" title="会员码">
       <template #header-extra>
-        <n-icon @click="showCode = false">
+        <n-icon size="large" @click="showCode = false">
           <circle-x></circle-x>
         </n-icon>
       </template>
@@ -90,7 +90,7 @@
 import { ref } from '@vue/reactivity';
 import { h, onMounted, watch } from '@vue/runtime-core';
 import { NLayout, NLayoutSider, NLayoutContent, NMenu, MenuOption, NIcon, NProgress, NText, NModal, NCard, NInput, NButton, NScrollbar, NTime, NTooltip, useDialog } from 'naive-ui'
-import { File, Trash, CircleX, Logout, Settings, Copy, Video, Camera } from '@vicons/tabler'
+import { File, Trash, CircleX, Logout, Settings, Copy, Video, Camera, Share } from '@vicons/tabler'
 import http from '../../utils/axios'
 import { byteConvert } from '../../utils'
 import { useRoute, useRouter } from 'vue-router'
@@ -126,11 +126,11 @@ import { useRoute, useRouter } from 'vue-router'
       key: 'invited',
       icon: renderIcon(Copy)
     },
-    // {
-    //   label: '资源库',
-    //   key: 'share',
-    //   icon: renderIcon(Share)
-    // },
+    {
+      label: '资源库',
+      key: 'share',
+      icon: renderIcon(Share)
+    },
     {
       label: '设置',
       key: 'setting',
@@ -230,7 +230,8 @@ import { useRoute, useRouter } from 'vue-router'
 <style>
   a {
     text-decoration: none;
-    color: inherit;
+    color: rgb(48, 110, 255);
+    padding: 0 10px;
   }
   .n-layout .logo-box {
     display: flex;

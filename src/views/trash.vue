@@ -20,7 +20,7 @@
         <div class="toolbar-item" @click="unTransh(checkedRowKeys)">
           <n-tooltip>
             <template #trigger>
-              <n-icon>
+              <n-icon size="large">
                 <corner-up-left-double></corner-up-left-double>
               </n-icon>
             </template>
@@ -30,7 +30,7 @@
         <div class="toolbar-item" @click="deleteTransh(checkedRowKeys)">
           <n-tooltip>
             <template #trigger>
-              <n-icon>
+              <n-icon size="large">
                 <circle-x></circle-x>
               </n-icon>
             </template>

@@ -36,7 +36,7 @@
         <div class="share-file-box" style="height: 100vh">
           <n-empty description="抱歉，该分享已被作者删除">
             <template #icon>
-            <n-icon>
+            <n-icon size="large">
               <file-analytics></file-analytics>
             </n-icon>
           </template>

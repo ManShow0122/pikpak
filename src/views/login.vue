@@ -113,7 +113,8 @@ const showMessage = () => {
   }
 }
 const getApk = () => {
-  http.get('https://api-drive.mypikpak.com/package/v1/apk/url/225815')
+  // 125818 是我的邀请key
+  http.get('https://api-drive.mypikpak.com/package/v1/apk/url/125818')
     .then((res:any) => {
       window.open(res.data.apk_url)
     })

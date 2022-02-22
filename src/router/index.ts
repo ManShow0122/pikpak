@@ -9,7 +9,7 @@ const routes: Array<RouteRecordRaw> = [
     beforeEnter: (to, from, next) => {
       const pikpakLogin = JSON.parse(window.localStorage.getItem('pikpakLogin') || '{}')
       if((!pikpakLogin || !pikpakLogin.access_token) && to.name !== 'setting') {
-       next('/login')
+       next('/sms')
       } else {
         next()
       }

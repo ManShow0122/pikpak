@@ -4,7 +4,7 @@
       <n-col :span="12">
         <n-statistic label="会员分成(天/次)" :value="invitationInfo?.invited_join_days ">
           <template #prefix>
-            <n-icon>
+            <n-icon size="large">
               <diamond />
             </n-icon>
           </template>
@@ -14,7 +14,7 @@
       <n-col :span="12">
         <n-statistic label="邀请奖励(天/人)" :value="invitationInfo?.add_days">
           <template #prefix>
-            <n-icon>
+            <n-icon size="large">
               <accessible />
             </n-icon>
           </template>
@@ -24,7 +24,7 @@
       <n-col :span="12">
         <n-statistic label="邀请链接" >
           <template #prefix>
-            <n-icon>
+            <n-icon size="large">
               <copyright></copyright>
             </n-icon>
           </template>
@@ -41,7 +41,7 @@
       <n-col :span="12">
         <n-statistic label="下载推广" >
           <template #prefix>
-            <n-icon>
+            <n-icon size="large">
               <arrow-down-circle ></arrow-down-circle>
             </n-icon>
           </template>

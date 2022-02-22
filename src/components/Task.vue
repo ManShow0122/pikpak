@@ -35,7 +35,7 @@
                 </div>
                 <n-popconfirm @positive-click="deleteTask(key)" placement="right">
                   <template #trigger>
-                    <n-icon color="#306eff">
+                    <n-icon size="large" color="#306eff">
                       <circle-x></circle-x>
                     </n-icon>
                   </template>

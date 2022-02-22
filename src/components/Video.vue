@@ -16,7 +16,7 @@ import "video.js/dist/video-js.min.css";
   }>()
   const initPlayer = () => {
     player.value = videojs("player", {
-      autoplay: false,
+      autoplay: true,
       controls: true,
       fluid: true,
       // aspectRatio: "16:9",
