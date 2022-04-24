@@ -16,7 +16,7 @@
           <n-form-item path="verification_code">
             <n-input-group>
               <n-input v-model:value="loginData.verification_code" placeholder="请输入验证码"></n-input>
-              <n-button @click="sendCode" :disabled="time < 60" :loading="codeLoading">{{ time >= 60 ? '发送验证码' : ('重新发送 ' + time + 's')}}</n-button>
+              <n-button @click="sendCode" :disabled="time < timeWait" :loading="codeLoading">{{ time >= timeWait ? '发送验证码' : ('重新发送 ' + time + 's')}}</n-button>
             </n-input-group>
           </n-form-item>
           <!-- <n-form-item label="" v-if="!isUser">
@@ -69,6 +69,7 @@ const loginData = ref({
 })
 const formRef = ref()
 const invite = ref(false)
+
 const rules:FormRules = {
   phone_number: [
     { required: true, message: '请输入手机号', trigger: 'blur' },
@@ -143,7 +144,8 @@ const sendCode = () => {
       })
   }
 }
-const time = ref(60)
+const timeWait = 30;
+const time = ref(timeWait)
 const timer = ref()
 const coutdown = () => {
   time.value = 59
@@ -152,7 +154,7 @@ const coutdown = () => {
     time.value--
     if(time.value <= 0) {
       clearInterval(timer.value)
-      time.value = 60
+      time.value = timeWait
       return
     }
   }, 1000)

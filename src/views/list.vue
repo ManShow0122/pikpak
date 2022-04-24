@@ -6,6 +6,9 @@
           <n-breadcrumb-item>
             <router-link to="/list">文件</router-link>
           </n-breadcrumb-item>
+          <n-breadcrumb-item>
+            <router-link to="/list/VMwHu00AxePbJtPMLwCQuX1jo1">My Pack</router-link>
+          </n-breadcrumb-item>
           <n-breadcrumb-item v-if="parentInfo && parentInfo.name">
             {{parentInfo.name}}
           </n-breadcrumb-item>
@@ -294,8 +297,10 @@ import axios from 'axios';
         return h('div', {
           class: 'file-info',
           onClick: () => {
+            console.log('row', row);
             if(row.kind === 'drive#folder') {
-              router.push('/list/' + row.id)
+              // router.push('/list/' + row.id)
+              row.name === 'My Pack' ? router.push('/list/' + row.id) : window.open(`${location.origin}${location.pathname}#/list/${row.id}`)
             } else if(row.mime_type.indexOf('video') != -1 || row.mime_type.indexOf('image') != -1  || row.mime_type.indexOf('audio') != -1) {
               getFile(row.id)
                 .then(res => {
