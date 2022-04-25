@@ -22,6 +22,11 @@
           <n-button v-if="copyFiles?.length" @click="copyPost">
             粘贴已复制{{copyFiles.length}}项资源
           </n-button>
+          <n-input round placeholder="搜索" v-model:value="searchContent">
+            <template #suffix>
+              <n-icon :component="Search" @click="doSearch" />
+            </template>
+          </n-input>
           <n-button  @click="showUserMenu = true">
             添加自定义菜单
           </n-button>
@@ -245,7 +250,7 @@ import { h, computed, onMounted, watch, nextTick } from '@vue/runtime-core'
 import http, { notionHttp } from '../utils/axios'
 import { useRoute, useRouter } from 'vue-router'
 import { DataTableColumns, NDataTable, NTime, NEllipsis, NModal, NCard, NInput, NBreadcrumb, NBreadcrumbItem, NIcon, useThemeVars, NButton, NTooltip, NSpace, NScrollbar, NSpin, NDropdown, useDialog, NAlert, useNotification, NotificationReactive, NSelect, NForm, NFormItem, NTag, NText, NInputGroup } from 'naive-ui'
-import { CirclePlus, CircleX, Dots, Share, Copy as IconCopy, SwitchHorizontal, LetterA, ZoomQuestion } from '@vicons/tabler'
+import { CirclePlus, CircleX, Dots, Share, Copy as IconCopy, SwitchHorizontal, LetterA, ZoomQuestion, Search } from '@vicons/tabler'
 import { byteConvert } from '../utils'
 import PlyrVue from '../components/Plyr.vue'
 import TaskVue from '../components/Task.vue'
@@ -592,7 +597,12 @@ import axios from 'axios';
   const showAddUrl = ref(false)
   const showCopy = ref(false)
   const newUrl = ref()
+  const searchContent = ref()
   const taskRef = ref()
+
+  const doSearch = () => {
+    window.find(searchContent.value);
+  }
   const firstFolder = computed(() => {
     let id:string = ''
     if(route.params.id) {
