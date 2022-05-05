@@ -39,8 +39,10 @@ import 'plyr/dist/plyr.css'
   const player = ref()
   const initPlayer = () => {
     player.value = new Plyr(playerRef.value, {
+      autoplay: true,
       // debug: true
     })
+    window.videoPlayer = player;
   }
   onMounted(initPlayer)
 </script>

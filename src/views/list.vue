@@ -37,7 +37,7 @@
       </div>
     </div>
     <n-scrollbar style="max-height: calc(100vh - 190px);" @scroll="scrollHandle">
-      <n-data-table v-model:checked-row-keys="checkedRowKeys"  :row-key="row => row.id" :data="filesList" size="small" :columns="columns" :bordered="false"></n-data-table>
+      <n-data-table v-model:checked-row-keys="checkedRowKeys" v-model:deleted-file-ids="deletedFileIds" :row-key="row => row.id" :data="filesList" size="small" :columns="columns" :bordered="false"></n-data-table>
       <div class="loading" v-if="loading">
         <n-spin size="small" />加载中
       </div>
@@ -273,6 +273,8 @@ import axios from 'axios';
   }
   const themeVars = useThemeVars()
   const checkedRowKeys = ref<string[]>([])
+  const deletedFileIds = ref<string[]>([])
+  
   const dialog = useDialog()
   const smallColums = ref<DataTableColumns>([
     {
@@ -300,9 +302,11 @@ import axios from 'axios';
       sorter: 'default',
       render: (row:any) => {
         return h('div', {
-          class: 'file-info',
+          class: ['file-info', deletedFileIds.value.includes(row.id) ? 'deleted-file' : ''].join(' '),
           onClick: () => {
-            console.log('row', row);
+            if(deletedFileIds.value.includes(row.id)){
+              return;
+            }
             if(row.kind === 'drive#folder') {
               // router.push('/list/' + row.id)
               row.name === 'My Pack' ? router.push('/list/' + row.id) : window.open(`${location.origin}${location.pathname}#/list/${row.id}`)
@@ -322,7 +326,11 @@ import axios from 'axios';
           }
         }, [
           h('img', {
-            src: row.thumbnail_link || row.icon_link
+            src: row.thumbnail_link || row.icon_link,
+            onClick: e => {
+              e.stopPropagation();
+              console.log('[]onClick', row.thumbnail_link || row.icon_link, e)
+            },
           }),
           h(NEllipsis, {
               class: 'title',
@@ -695,7 +703,8 @@ import axios from 'axios';
         if(typeof id === 'object') {
           checkedRowKeys.value = []
         }
-        getFileList()
+        deletedFileIds.value = deletedFileIds.value.concat(typeof id === 'string' ? [id] : id);
+        // getFileList()
       })
   }
   const showCopyFail = ref(false)
@@ -1220,6 +1229,10 @@ import axios from 'axios';
 .file-info {
   display: flex;
   align-items: center;
+}
+.deleted-file{
+  text-decoration: line-through;
+  color: #AAA;
 }
 .file-info img {
   width: 28px;
