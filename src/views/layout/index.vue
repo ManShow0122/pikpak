@@ -217,7 +217,7 @@ import { useRoute, useRouter } from 'vue-router'
               window.localStorage.removeItem('pikpakLogin')
               window.localStorage.removeItem('pikpakLoginData')
               window.$message.success('退出成功')
-              router.push('/login')
+              router.push('/sms')
             })
             .catch(error => {
               console.log(error)

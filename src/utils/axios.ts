@@ -26,12 +26,10 @@ instance.interceptors.response.use(response => {
   if(response.status) {
     switch (response.status) {
       case 401:
-        console.log(1)
         // router.push('/login')
         const loginData = window.localStorage.getItem('pikpakLoginData')
         const loginDataJson = loginData ? JSON.parse(loginData) : {}
         if(loginDataJson.username && loginDataJson.password && !isLoginLoading) {
-          console.log('wait', config.url)
           isLoginLoading = true
           return instance.post('https://user.mypikpak.com/v1/auth/signin', {
             "captcha_token": "",
@@ -47,7 +45,7 @@ instance.interceptors.response.use(response => {
               return instance(config)
             })
             .catch(() => {
-              router.push('/login')
+              router.push('/sms')
               return false
             })
         } else if(loginDataJson.username && loginDataJson.password && isLoginLoading) {
@@ -60,7 +58,7 @@ instance.interceptors.response.use(response => {
             }, 100)
           })
         } else {
-          router.push('/login')
+          router.push('/sms')
           return Promise.reject(error)
         }
         
@@ -72,7 +70,6 @@ instance.interceptors.response.use(response => {
         break;
     }
   }
-  console.log(config.url, 111)
   return Promise.reject(error)
 })
 

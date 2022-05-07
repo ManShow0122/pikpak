@@ -249,7 +249,7 @@ import { ref } from '@vue/reactivity';
 import { h, computed, onMounted, watch, nextTick } from '@vue/runtime-core'
 import http, { notionHttp } from '../utils/axios'
 import { useRoute, useRouter } from 'vue-router'
-import { DataTableColumns, NDataTable, NTime, NEllipsis, NModal, NCard, NInput, NBreadcrumb, NBreadcrumbItem, NIcon, useThemeVars, NButton, NTooltip, NSpace, NScrollbar, NSpin, NDropdown, useDialog, NAlert, useNotification, NotificationReactive, NSelect, NForm, NFormItem, NTag, NText, NInputGroup } from 'naive-ui'
+import { DataTableColumns, NDataTable, NTime, NRate, NProgress, NEllipsis, NModal, NCard, NInput, NBreadcrumb, NBreadcrumbItem, NIcon, useThemeVars, NButton, NTooltip, NSpace, NScrollbar, NSpin, NDropdown, useDialog, NAlert, useNotification, NotificationReactive, NSelect, NForm, NFormItem, NTag, NText, NInputGroup } from 'naive-ui'
 import { CirclePlus, CircleX, Dots, Share, Copy as IconCopy, SwitchHorizontal, LetterA, ZoomQuestion, Search } from '@vicons/tabler'
 import { byteConvert } from '../utils'
 import PlyrVue from '../components/Plyr.vue'
@@ -278,6 +278,44 @@ import axios from 'axios';
   const dialog = useDialog()
   const smallColums = ref<DataTableColumns>([
     {
+      title: '评分',
+      key: 'rate',
+      sorter: 'default',
+      align: 'right',
+      render: (row) => {
+        // console.log('[评分]', row, localStorage.getItem(`VideoRate_${row.name}`))
+        if(!(row.mime_type as string).startsWith('video')){
+          return null;
+        }
+        return h(NRate, {
+          value: (localStorage.getItem(`VideoRate_${row.name}`) || 0) - 0,
+          onUpdateValue: value => {
+            localStorage.setItem(`VideoRate_${row.name}`, value + '');
+            
+          }
+        })
+      },
+      className: 'rate',
+      width: 140
+    },
+    {
+      title: '观看进度',
+      key: 'last_played',
+      align: 'right',
+      render: (row) => {
+        if(!(row.mime_type as string).startsWith('video') || !localStorage.getItem(`VideoLastPlayedTime_${row.name}`)){
+          return null;
+        }
+        return h(NProgress, {
+          type: 'line',
+          percentage: parseInt((localStorage.getItem(`VideoLastPlayedTime_${row.name}`) - 0) / row.params.duration * 100) ,
+          borderRadius: 4,
+        })
+      },
+      className: 'rate',
+      width: 140
+    },
+    {
       title: '修改时间',
       key: 'modified_time',
       sorter: 'default',
@@ -289,7 +327,7 @@ import axios from 'axios';
         })
       },
       className: 'modified_time',
-      width: 160
+      width: 100
     },
   ])
   const columns = ref<DataTableColumns>([

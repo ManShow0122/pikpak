@@ -15,3 +15,17 @@ export const byteConvert = function(bytes:number) {
   }
   return bytes + ' ' + symbols[i]
 }
+
+export const throttle = (fn: Function, wait: number) => {
+  var timer = null;
+  return function(){
+      const context = this;
+      const args = arguments;
+      if(!timer){
+          timer = setTimeout(function(){
+              fn.apply(context,args);
+              timer = null;
+          },wait)
+      }
+  }
+}
