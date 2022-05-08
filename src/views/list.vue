@@ -690,7 +690,7 @@ import axios from 'axios';
           postData = {
             kind: "drive#file",
             name: "",
-            parent_id: route.params.id || '',
+            parent_id: firstFolder.value || route.params.id || '',
             upload_type: "UPLOAD_TYPE_URL",
             url: {
               url: url
@@ -702,7 +702,8 @@ import axios from 'axios';
           hasHash = true
           postData = {
             "kind":"drive#folder",
-            "parent_id": route.params.id || '',
+            // "parent_id": route.params.id || '',
+            "parent_id": firstFolder.value || route.params.id || '',
             "name": url
           }
         }
@@ -712,6 +713,11 @@ import axios from 'axios';
             if(res.data.upload_type === 'UPLOAD_TYPE_UNKNOWN' || url.indexOf('PikPak://') === -1) {
               window.$message.success('添加成功')
             }
+            // 磁链 就算指定了 parent_id 也仍然会被保存到 My Pack 下，因此成功后自动迁移下
+            setTimeout(() => {
+              moveFiles.value = [res.data.task.id];
+              movePost()
+            }, 20000);
           })
           .finally(() => {
             successLength++
